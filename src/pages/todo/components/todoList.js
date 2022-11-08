@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
-const TodoList = () => {
+const TodoList = ({ state }) => {
   return (
     <Wrap>
       <div>
-        1. 퍼블리싱 <Bt>완료</Bt>
-      </div>
-      <div>
-        2. 기능 구현 <Bt>완료</Bt>
+        {state.id}. {state.content} <Bt>완료</Bt>
+        <Bt>수정</Bt>
       </div>
     </Wrap>
   );

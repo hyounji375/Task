@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { flexCenter } from "../../../style/common";
 
-const TodoTitle = () => {
-  return <Title>오늘의 todos 0개</Title>;
+const TodoTitle = ({ state }) => {
+  return <Title>오늘의 todos {state.length}개</Title>;
 };
 export default TodoTitle;
 

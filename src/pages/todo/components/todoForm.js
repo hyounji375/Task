@@ -1,11 +1,39 @@
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { UseInput } from "../../../hooks/useInput";
+import { ADDPOST_SUCCESS } from "../../../reducer/todo";
 
 const TodoForm = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.todoReducer.allPost);
+
+  const [todo, onChangeTodo, setTodo] = UseInput("");
+
+  const onAddTodo = useCallback(() => {
+    dispatch({
+      type: ADDPOST_SUCCESS,
+      data: {
+        id:
+          (state.length === 0 && 1) ||
+          (state.length > 0 && state[state.length - 1].id + 1),
+        content: todo,
+      },
+    });
+    setTodo("");
+    console.log(state);
+  }, [dispatch, state, setTodo, todo]);
+
   return (
     <Wrap>
-      <InputCSS type="text" placeholder="할 일을 적어주세요." />
+      <InputCSS
+        type="text"
+        placeholder="할 일을 적어주세요."
+        value={todo}
+        onChange={onChangeTodo}
+      />
       <BtWrap>
-        <Bt>등록하기</Bt>
+        <Bt onClick={onAddTodo}>등록하기</Bt>
         <Bt>초기화</Bt>
       </BtWrap>
     </Wrap>
